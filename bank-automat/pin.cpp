@@ -20,28 +20,6 @@ void PIN::paivitaNaytto()
     ui->lineEdit->setText(piilotettuPin);
 }
 
-void PIN::tarkistaPin()
-{
-    QString oikeaPin = "1234"; // tähä jotenki myöhemmi et vertaa
-                               // sitä tietokantaan jotenki
-
-    if (syotettyPin == oikeaPin) {
-        qDebug() << "PIN oikein";
-        // laitan saman viestin käyttöliittymään koska voin
-        ui->tekstiruutu->setText("PIN oikein");
-        // sit täältä hypätään sinne valikkoon?
-    } else {
-        yritykset--;
-        qDebug() << "PIN väärin. yrityksiä jäljellä: "<<yritykset;
-        // laitan saman viestin käyttöliittymään koska voin
-        ui->tekstiruutu->setText("PIN väärin. yrityksiä jäljellä: "+ QString::number(yritykset));
-    }
-    if (yritykset == 0) {
-        tilinLukitus();
-    }
-    syotettyPin.clear();
-    ui->lineEdit->clear();
-}
 
 void PIN::tilinLukitus()
 {
@@ -147,6 +125,6 @@ void PIN::on_clearBtn_clicked()
 
 void PIN::on_enterBtn_clicked()
 {
-    tarkistaPin();
+    emit sendPin(syotettyPin);
 }
 

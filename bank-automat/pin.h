@@ -15,7 +15,8 @@ public:
     explicit PIN(QWidget *parent = nullptr);
     ~PIN();
 
-public slots:
+signals:
+    void sendPin(QString);
 
 private slots:
     void on_N1_clicked();
@@ -36,7 +37,7 @@ private:
     QString syotettyPin;
     int yritykset = 3;
     void paivitaNaytto();
-    void tarkistaPin();
+
     void tilinLukitus();
 };
 
